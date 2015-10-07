@@ -51,6 +51,15 @@ $.magnificPopup.registerModule('gallery', {
 						}
 					});
 				}
+                    
+                //[GalleryServer]: Add touchscreen support for wiping left and right. Requires existence of touchwipe library (http://www.netcu.de/jquery-touchwipe-iphone-ipad-library)
+                var isTouchScreen = !!('ontouchstart' in window) || !!navigator.msMaxTouchPoints;
+                if (isTouchScreen && $.fn.touchwipe) {
+                    mfp.wrap.touchwipe({
+                        wipeLeft: function () { mfp.next(); },
+                        wipeRight: function () { mfp.prev(); }
+                    });
+                }
 
 				_document.on('keydown'+ns, function(e) {
 					if (e.keyCode === 37) {
