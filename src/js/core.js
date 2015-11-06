@@ -66,7 +66,8 @@ var _mfpOn = function(name, f) {
 			// converts "mfpEventName" to "eventName" callback and triggers it if it's present
 			e = e.charAt(0).toLowerCase() + e.slice(1);
 			if(mfp.st.callbacks[e]) {
-				mfp.st.callbacks[e].apply(mfp, $.isArray(data) ? data : [data]);
+                    		//[GalleryServer] Change apply() to call() and insert mfp parameter at beginning, causing the second mfp arg to appear as a parameter in the receiving callback
+                    		mfp.st.callbacks[e].call(mfp, mfp, $.isArray(data) ? data : [data]);
 			}
 		}
 	},
